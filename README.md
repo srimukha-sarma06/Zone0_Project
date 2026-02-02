@@ -22,26 +22,11 @@ Industrial accidents often occur because operators have blind spots or suffer me
 * **📊 Low-Latency Dashboard:** A flicker-free Streamlit interface showing live video, CPU/RAM stats, and sensor data.
 
 ## 🚀 Performance Optimizations
-To achieve consistent **10+ FPS** on embedded hardware, we implemented aggressive optimizations:
+To achieve consistent **5-10 FPS** on embedded hardware, we implemented aggressive optimizations:
 
 1.  **Model Quantization (ONNX):** We utilize `onnxruntime` instead of PyTorch. The YOLOv8 models were exported to `.onnx` format, reducing memory footprint by 40% while maintaining accuracy.
 2.  **Intelligent Frame Skipping:** The AI inference engine processes every **3rd frame** (`AI_SKIP_FRAMES = 3`). This frees up CPU cycles for the video stream rendering and serial communication, ensuring the UI remains responsive.
 3.  **Manual Garbage Collection:** Embedded Python environments can struggle with automatic memory management. We force a `gc.collect()` every **60 frames** to prevent "RAM Creep" and ensure 24/7 stability.
-
-## ⚙️ Hardware Architecture
-
-**Board:** Arduino UNO Q / R4 WiFi
-**Add-ons:** Modulino Shield (Thermo, Pixels, Buzzer), 5V Relay Module, USB Webcam.
-
-| Component | Pin / Port | Description |
-| :--- | :--- | :--- |
-| **Baler Machine** | `Pin 9` | Relay control for Baler Motor. |
-| **Hydraulic Press** | `Pin 10` | Relay control for Press Motor. |
-| **Machine 3** | `Pin 11` | Reserved for future expansion. |
-| **Modulino Thermo** | `I2C` | Real-time temperature monitoring. |
-| **Manual Reset 1** | `Pin 2` | Physical button to restart Baler. |
-| **Manual Reset 2** | `Pin 3` | Physical button to restart Press. |
-| **Communication** | `Serial` | Bridge connection between Linux (Python) and MCU. |
 
 ## 🛠️ Software Architecture
 
