@@ -5,10 +5,6 @@
 > **Submitted for: Qualcomm "AI for All" Hackathon 2026**
 > *Deployed on: Arduino UNO Q / Modulino Edge Hardware*
 
-![License](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg) ![Status](https://img.shields.io/badge/Status-Prototype_Ready-success) ![FPS](https://img.shields.io/badge/Performance-10%2B_FPS-blue) ![Hardware](https://img.shields.io/badge/Hardware-Arduino_UNO_Q-orange)
-
-![Project Demo GIF](https://via.placeholder.com/800x400.png?text=Upload+Your+Zone+Breach+GIF+Here)
-
 ## 📖 Overview
 Industrial accidents often occur because operators have blind spots or suffer medical emergencies while alone. Traditional safety cameras are **passive**—they record the accident but don't stop it.
 
@@ -32,9 +28,9 @@ To achieve consistent **5-10 FPS** on embedded hardware, we implemented aggressi
 
 The system uses a split-architecture approach:
 
-* **Linux Side (Python 3.11):**
+* **Linux Side (Python 3.13):**
     * `accident_logic.py`: The AI Brain. Handles ONNX inference and zone overlap logic.
-    * `threading_file.py`: The Controller. Manages the video loop, reads Modulino sensors via Serial, and sends command strings (`"M1"`, `"fire"`).
+    * `threading_file.py`: The Controller. Manages the video loop, reads Modulino sensors via Serial, and sends command strings (`"M1"`, `"M2"`, etc).
     * `app.py`: The Dashboard. Renders the UI using Base64 encoding for smooth video.
 * **Microcontroller Side (C++):**
     * `Modulino_Zone0.ino`: Firmware that handles pin toggling, reads the thermal sensor, and manages the safety latch logic.
@@ -42,7 +38,7 @@ The system uses a split-architecture approach:
 ## 📦 Installation & Setup
 
 ### 1. Prerequisites
-* Python 3.11+ (running on the Linux side of the board).
+* Python 3.13 (running on the Linux side of the board).
 * Dependencies: `opencv-python`, `streamlit`, `onnxruntime`, `psutil`, `pyserial`.
 
 ### 2. Deployment Steps
