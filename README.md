@@ -87,4 +87,4 @@ This project is licensed under the **Mozilla Public License 2.0**. See the `LICE
 
 ## 👥 Team
 **Event:** Qualcomm AI for All Hackathon 2026
-**Developer:** Srimukha Sarma
+**Team:** CodeNotWorkin
