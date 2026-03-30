@@ -44,7 +44,7 @@ The system uses a split-architecture approach:
 ### 2. Deployment Steps
 1.  **Clone the Repo:**
     ```bash
-    git clone [https://github.com/YourUsername/Zone0-Active-Safety-Interlock.git](https://github.com/YourUsername/Zone0-Active-Safety-Interlock.git)
+    git clone [https://github.com/srimukha-sarma06/Zone0-Active-Safety-Interlock.git](https://github.com/YourUsername/Zone0-Active-Safety-Interlock.git)
     cd Zone0-Active-Safety-Interlock
     ```
 2.  **Upload Firmware:** Flash `Modulino_Zone0.ino` to the Arduino side using the Arduino IDE.
