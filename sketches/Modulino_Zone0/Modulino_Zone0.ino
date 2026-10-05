@@ -85,7 +85,8 @@ void loop() {
   temperature = thermo.getTemperature();
   String temperature_text = String(temperature, 1) + "°C";
 
-  Serial.println(temperature_text);
+  Serial.print("T:");
+  Serial.println(temperature, 1);
 
   // ---------- Over-temperature protection ----------
 
