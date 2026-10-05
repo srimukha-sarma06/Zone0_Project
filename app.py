@@ -51,8 +51,12 @@ def main():
     c1.metric("CPU", f"{cpu_usage}%")
     c2.metric("RAM", f"{ram}%")
     
-    current_temp = getattr(st.session_state, 'current_temp', 0.0)
-    c3.metric("Temp", f"{current_temp}°C")
+    current_temp = getattr(st.session_state, "current_temp", None)
+
+    if current_temp is not None:
+        c3.metric("Temp", f"{current_temp:.1f}°C")
+    else:
+        c3.metric("Temp", "N/A")
     
     st.sidebar.divider()
     
