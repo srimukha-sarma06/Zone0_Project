@@ -74,6 +74,7 @@ def overlap(frame):
     if frame_counter % 60 == 0: gc.collect() 
 
     run_ai = (frame_counter % AI_SKIP_FRAMES == 0)
+    run_fire = (frame_counter % FIRE_CHECK_INTERVAL == 0)
     
     if run_ai:
         last_persons = []
@@ -94,15 +95,15 @@ def overlap(frame):
                     last_violations.append((cls_id, coords))
 
         # --- FIRE DETECTION (ONNX) ---
-        if model_fire and (frame_counter % FIRE_CHECK_INTERVAL == 0):
-            last_fire_coords = []
-            last_fire_status = False
-            
-            fire_detections = model_fire.predict(frame, conf=0.5)
-            
-            for d in fire_detections:
-                last_fire_status = True
-                last_fire_coords.append(d['box'])
+    if model_fire and run_fire:
+        last_fire_coords = []
+        last_fire_status = False
+        
+        fire_detections = model_fire.predict(frame, conf=0.5)
+        
+        for d in fire_detections:
+            last_fire_status = True
+            last_fire_coords.append(d['box'])
 
     curr_time = time.time()
     prev_time = curr_time
