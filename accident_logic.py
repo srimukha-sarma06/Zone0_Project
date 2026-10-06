@@ -165,11 +165,18 @@ def overlap(frame):
             inter_x1 = max(mz[0], px1); inter_y1 = max(mz[1], py1)
             inter_x2 = min(mz[2], px2); inter_y2 = min(mz[3], py2)
             
-            if max(0, inter_x2 - inter_x1) * max(0, inter_y2 - inter_y1) > 0:
-                zone_breached = True
-                if not fire_involved and "MAN DOWN" not in str(breached_machine_name):
-                    breached_machine_name = machine['name']
-                status_color = (0, 0, 255)
+            intersection_area = (
+                max(0, inter_x2 - inter_x1)
+                * max(0, inter_y2 - inter_y1)
+            )
+            
+            person_area = (px2 - px1) * (py2 - py1)
+            
+            if person_area > 0:
+                overlap_ratio = intersection_area / person_area
+            
+                if overlap_ratio > 0.10:
+                    zone_breached = True
 
         cv.rectangle(frame, (px1, py1), (px2, py2), status_color, 2)
         cv.putText(frame,"Person", (px1, py1-10), cv.FONT_HERSHEY_COMPLEX_SMALL, 0.8, status_color, 1)
