@@ -97,7 +97,7 @@ def video_live(state):
                     if "Baler" in machine:
                         ser.write(b"M1\n") # Matches if (cmd == "M1")
                         print("Baler Overlap")
-                    if "Hydraulic" in machine:
+                    elif "Hydraulic" in machine:
                         ser.write(b"M2\n") # Matches if (cmd == "M2")
                         print("Hydraulic Press Overlap")
                 
