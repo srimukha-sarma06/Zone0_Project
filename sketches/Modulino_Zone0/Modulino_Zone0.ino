@@ -105,38 +105,40 @@ void loop() {
     String cmd = Monitor.readStringUntil('\n');
     cmd.trim();
 
-    if (cmd == "M1") {
-      machine1state = !machine1state;
-      digitalWrite(machine1, machine1state);
-      Monitor.println(machine1state ? "Motor 1 ON" : "Motor 1 OFF");
-      playMelody(motor_flag);
+    if (cmd == "STOP_M1") {
+        machine1state = LOW;
+        digitalWrite(machine1, LOW);
+        Monitor.println("Motor 1 OFF");
+        playMelody(motor_flag);
     }
-  if ((temperature > 50) && (cmd == "fire" )){
-    digitalWrite(machine1, LOW);
-    digitalWrite(machine2, LOW);
-    digitalWrite(machine3, LOW);
-
-    Monitor.println("⚠ OVER TEMPERATURE! MACHINES OFF");
-    playMelody(temp_alert);
-  }
-
-
-   if (cmd == "M2") {
-      machine2state = !machine2state;
-      digitalWrite(machine2, machine2state);
-      Monitor.println(machine2state ? "Motor 2 ON" : "Motor 2 OFF");
-      playMelody(motor_flag);
+    else if (cmd == "STOP_M2") {
+        machine2state = LOW;
+        digitalWrite(machine2, LOW);
+        Monitor.println("Motor 2 OFF");
+        playMelody(motor_flag);
     }
-
-    if (cmd == "M3") {
-      machine3state = !machine3state;
-      digitalWrite(machine3, machine3state);
-      Monitor.println(machine3state ? "Motor 3 ON" : "Motor 3 OFF");
-      playMelody(motor_flag);
+    else if (cmd == "STOP_M3") {
+        machine3state = LOW;
+        digitalWrite(machine3, LOW);
+        Monitor.println("Motor 3 OFF");
+        playMelody(motor_flag);
     }
-
+    else if (cmd == "FIRE") {
+        if (temperature > 50.0) {
+            machine1state = LOW;
+            machine2state = LOW;
+            machine3state = LOW;
+    
+            digitalWrite(machine1, LOW);
+            digitalWrite(machine2, LOW);
+            digitalWrite(machine3, LOW);
+    
+            Monitor.println("FIRE CONFIRMED - MACHINES OFF");
+            playMelody(temp_alert);
+        }
+    }
     else {
-      Monitor.println("❌ Invalid Command (Use M1, M2, M3)");
+        Monitor.println("Invalid command");
     }
   }
   int pressed = 0;
