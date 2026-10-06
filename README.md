@@ -53,23 +53,6 @@ The system uses a split-architecture approach:
     pip install -r requirements.txt
     ```
 
-### 3. Production Auto-Start (Systemd)
-To ensure the system starts automatically on boot and recovers from crashes, we use a custom systemd service.
-
-1.  Copy the provided service file:
-    ```bash
-    sudo cp zone0.service /etc/systemd/system/
-    ```
-2.  Enable the service:
-    ```bash
-    sudo systemctl daemon-reload
-    sudo systemctl enable zone0.service
-    ```
-3.  Start the system:
-    ```bash
-    sudo systemctl start zone0.service
-    ```
-
 ## 🕹️ Usage Guide
 1.  **Start:** The system boots with machines in the "ON" (Safe) state.
 2.  **Monitor:** Access the dashboard at `http://<BOARD_IP>:8501`.
