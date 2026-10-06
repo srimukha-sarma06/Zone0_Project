@@ -159,24 +159,39 @@ def overlap(frame):
             active_warnings.update(current_person_violations)
 
         # Zone Breach Checks
+        # Zone Breach Checks
         for machine in machines:
             z = machine['zone']
-            mz = [int(z[0]*w_img), int(z[1]*h_img), int(z[2]*w_img), int(z[3]*h_img)]
-            inter_x1 = max(mz[0], px1); inter_y1 = max(mz[1], py1)
-            inter_x2 = min(mz[2], px2); inter_y2 = min(mz[3], py2)
-            
+        
+            mz = [
+                int(z[0] * w_img),
+                int(z[1] * h_img),
+                int(z[2] * w_img),
+                int(z[3] * h_img)
+            ]
+        
+            inter_x1 = max(mz[0], px1)
+            inter_y1 = max(mz[1], py1)
+            inter_x2 = min(mz[2], px2)
+            inter_y2 = min(mz[3], py2)
+        
             intersection_area = (
                 max(0, inter_x2 - inter_x1)
                 * max(0, inter_y2 - inter_y1)
             )
-            
-            person_area = (px2 - px1) * (py2 - py1)
-            
+        
+            person_area = max(0, px2 - px1) * max(0, py2 - py1)
+        
             if person_area > 0:
                 overlap_ratio = intersection_area / person_area
-            
+        
                 if overlap_ratio > 0.10:
                     zone_breached = True
+        
+                    if breached_machine_name is None:
+                        breached_machine_name = machine['name']
+        
+                    status_color = (0, 0, 255)
 
         cv.rectangle(frame, (px1, py1), (px2, py2), status_color, 2)
         cv.putText(frame,"Person", (px1, py1-10), cv.FONT_HERSHEY_COMPLEX_SMALL, 0.8, status_color, 1)
