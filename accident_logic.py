@@ -159,7 +159,6 @@ def overlap(frame):
             active_warnings.update(current_person_violations)
 
         # Zone Breach Checks
-        # Zone Breach Checks
         for machine in machines:
             z = machine['zone']
         
