@@ -1,10 +1,6 @@
 {
     "confidence_threshold": 0.7,
-    "fire_involved" : false,
     "iou_threshold": 0.05,
-    "missing_ppe" : false,
-    "hit": true,
-    "hit_machine": null,
     "machines": [
         {
             "id": 0,
